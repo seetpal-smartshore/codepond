@@ -1,0 +1,50 @@
+<!Doctype html>
+
+<html ng-app='dash'>
+<head>
+
+	<script src='assesdts/angular.min.js'></script>
+	<script src='assets/app.js'></script>
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js' ng-src='no need of this'></script>
+	
+</head>
+<body>
+
+	
+	<div  ng-controller='mainCtrl as game'>
+		<pre style='color:red' >{{game.mint | json}}</pre>
+		
+		<form name='game1' novalidate>
+			<input ng-model='game.cast.name' >
+			<input ng-model='game.cast.fame' type='email' >
+			<input ng-model='game.cast.blame' ><br/>
+			Its valid now	=	{{game1.$valid}} <br/>
+			<input type='reset' ng-click='reset()' value='reset'  >
+			<input type='button' ng-disabled='!game1.$valid' ng-click='game.sbumit(game1)' value='submit'  >
+		</form>
+		
+		<pre >{{game.cast | json}}</pre>
+		<pre >{{game.testo | json}}</pre>
+	</div>
+
+	<script>
+		var app = angular.module('dash', []);
+
+		app.controller('mainCtrl', function(){
+			var	game	=	this;
+			game.testo	=	[];
+			
+			game.sbumit	=	function(game1){
+				console.log('saved');
+				//game.testo	=	angular.copy(game.cast);
+				game.testo.push(game.cast);
+				//game1.$setUntouched();
+				game1.$setPristine();
+			};
+			game.mint	=	[];
+		});
+	</script>
+	
+</body>
+</html>
